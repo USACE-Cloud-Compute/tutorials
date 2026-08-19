@@ -1,6 +1,6 @@
 # CC Hello World
 
-Now that you have the [`cccli` up and running](./03_cc-cli.md) locally and a [local Docker compute environment](./02_setting-up-local-docker.md) configured we can run the hello world compute examples to familiarize yourself with running computes.
+Now that you have the [`cccli` up and running](../../docs/03_cc-cli.md) locally and a [local Docker compute environment](../../docs/02a_setting-up-local-docker.md) configured we can run the hello world compute examples to familiarize yourself with running computes.
 
 ## Setup
 

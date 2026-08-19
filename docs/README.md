@@ -17,6 +17,10 @@ While we try to keep the topics in this documentation as approachable as possibl
 
 [Setting up AWS](./02b_setting-up-aws.md) - How to configure an AWS account for CC.
 
-[Hello World Tutorial](./03a_hello-world.md) - Run the hello world plugin locally to get a feel for how CC orchestrates jobs.
+[CC CLI](./03_cc-cli.md) - Command-line interface documentation.
+
+[Hello World Tutorial](../tutorials/hello-world/README.md) - Run the hello world plugin locally to get a feel for how CC orchestrates jobs.
 
 [Advanced Topics](./04_advanced-topics.md) - More "in-the-weeds" documentation on the files required for using CC.
+
+[Glossary](./08_glossary.md) - Comprehensive reference of Cloud Compute terminology.

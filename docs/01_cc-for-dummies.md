@@ -29,13 +29,13 @@ In order to use CC, we must first set up a compute environment. The compute envi
 
 As currently implemented in CC there are 2 main ways to set up a compute environment:
 
-- [Local Docker](./02_setting-up-local-docker.md)
+- [Local Docker](./02a_setting-up-local-docker.md)
 
   - Minio for object storage
   - Docker desktop or dockerd for container run-time
   - Local CloudCompute for orchestration
 
-- [Cloud (Amazon Web Services)](./03_setting-up-aws.md)
+- [Cloud (Amazon Web Services)](./02b_setting-up-aws.md)
 
   - S3 for object storage
   - AWS Batch for container run-time and orchestration
@@ -46,7 +46,7 @@ Before we get too much further, we need to make sure we're using common terminol
 
 ![CC Definition Pyramid](./img/cc-pyramid.png)
 
-- **Compute** - Highest level of the CC pyramid, a Compute is equivalent to one `run` command through the [CLI tool](./08_cc-cli.md). A compute is described by the `compute.json` file laying out the compute environment to be used, what plugins will be used, and defines the event or events that will be distributed across compute resources.
+- **Compute** - Highest level of the CC pyramid, a Compute is equivalent to one `run` command through the [CLI tool](./03_cc-cli.md). A compute is described by the `compute.json` file laying out the compute environment to be used, what plugins will be used, and defines the event or events that will be distributed across compute resources.
 
 - **Event** - A set of connected jobs that are organized in a Directed Acyclic Graph (DAG) - a single compute may have many Events based on the event generator used (see below).
 
@@ -66,9 +66,9 @@ CC uses a number of files to register and run compute jobs. These files are JSON
 
 Manifests are JSON files based on CC conventions. There are 2 kinds of manifests used by CC:
 
-- **Plugin Manifest** - Used to register a plugin for use by CC. Contains information describing the source image and any environment configuration that should be used. This is functionally equivalent to the [job definition](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) in AWS Batch parlance. See the [plugin registration](./04_plugin-registration.md) section for more information about what goes into the plugin manifest.
+- **Plugin Manifest** - Used to register a plugin for use by CC. Contains information describing the source image and any environment configuration that should be used. This is functionally equivalent to the [job definition](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) in AWS Batch parlance. See the [plugin registration](./04_advanced-topics.md#plugin-registration) section for more information about what goes into the plugin manifest.
 
-- **Compute Manifest** - Defines the configuration for an individual Job utilizing a CC Plugin. See the [compute manifests](./05_compute-manifests.md) section for more information about what goes into the compute manifest.
+- **Compute Manifest** - Defines the configuration for an individual Job utilizing a CC Plugin. See the [compute manifests](./06_compute-manifest.md) section for more information about what goes into the compute manifest.
 
 ### Compute File
 
@@ -76,7 +76,7 @@ The [compute file](./07_compute-file.md) is a JSON file that is used to define t
 
 Cloud Compute uses the concept of an event identifier which is injected into the compute environment as the variable `CC_EVENT_IDENTIFIER`. This value is a string and can be anything the plugin needs to incorporate into its compute, from a simple integer event number, to a set of values the plugin can process using its own logic.
 
-You could define a single event in your compute file (see `/hello-world/compute.json`), and this is useful, but what if you want to run the same "event" a hundred times? That's where the event generator concept comes in. There are currently three kinds of event generators available in CC:
+You could define a single event in your compute file (see `tutorials/hello-world/compute.json`), and this is useful, but what if you want to run the same "event" a hundred times? That's where the event generator concept comes in. There are currently three kinds of event generators available in CC:
 
 Each event generator creates a unique value for the event being run, this value is passed into the compute environment as a string environment variable named `CC_EVENT_IDENTIFIER`. Plugins can use this information to make decisions such as what initial conditions to use for a hydrologic model. By keeping the relationship between the `CC_EVENT_IDENTIFIER` and runtime state static, you can go back and run a subset of events easily by passing in their ID values using the Stream Event Generator. See the [compute file docs](./07_compute-file.md) for more details on each.
 
@@ -92,6 +92,6 @@ To make things even more interesting, compute files contain the option of what i
 
 ## Putting it all Together
 
-Once each of the pieces are in place, we use the [CC CLI](./08_cc-cli.md) to read the configuration files and send the compute to the compute environment.
+Once each of the pieces are in place, we use the [CC CLI](./03_cc-cli.md) to read the configuration files and send the compute to the compute environment.
 
 [**Next Step - Set up Local Docker Compute Environment**](./02a_setting-up-local-docker.md)
